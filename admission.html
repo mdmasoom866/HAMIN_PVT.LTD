@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Admission Form - HAMIN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #ffffff;
+            --accent: #287A74;
+            --accent-light: #4a9b95;
+            --accent-gold: #287A74;
+            --gray-light: #f8f9fa;
+            --gray-dark: #374151;
+            --text-primary: #0a0a0a;
+            --text-secondary: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --primary: #f8f9fa;
+                --secondary: #0a0a0a;
+                --accent: #287A74;
+                --accent-light: #4a9b95;
+                --gray-light: #1f2937;
+                --gray-dark: #9ca3af;
+                --text-primary: #f8f9fa;
+                --text-secondary: #9ca3af;
+                --border-color: #374151;
+                color-scheme: dark;
+            }
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-primary);
+            background: var(--secondary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--secondary);
+            border-bottom: 2px solid var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        .logo-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            line-height: 1;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-tagline {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .back-btn {
+            background: var(--accent);
+            color: var(--secondary);
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .admission-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .admission-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .admission-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .admission-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Form Sections */
+        .form-section {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Form Groups */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .form-group label .required {
+            color: #ef4444;
+            margin-left: 2px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.85rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--gray-light);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* School Details */
+        .school-details .form-group select {
+            font-size: 1rem;
+            padding: 0.9rem;
+        }
+
+        .class-selection {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Institution Level Selection */
+        .level-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .level-option {
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: var(--gray-light);
+        }
+
+        .level-option:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .level-option.selected {
+            border-color: var(--accent);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .level-option .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .level-option .label {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        /* Course Selection */
+        .course-selection {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .course-option {
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--secondary);
+        }
+
+        .course-option:hover {
+            border-color: var(--accent);
+            background: var(--gray-light);
+        }
+
+        .course-option.selected {
+            border-color: var(--accent);
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Submit Button */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--secondary);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admission-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .level-selection {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--secondary);
+            border-radius: 12px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-message .icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-message h2 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .success-message p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10v20M8 20h8M16 10v20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M28 10h-4v20h4c3.31 0 6-2.69 6-6v-8c0-3.31-2.69-6-6-6z" fill="white" opacity="0.9"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-title">HAMIN</div>
+                    <div class="logo-tagline">Education</div>
+                </div>
+            </a>
+            <button class="back-btn" onclick="window.history.back()">← Back to Home</button>
+        </nav>
+    </header>
+
+    <main class="admission-container">
+        <div id="admissionForm" class="admission-form">
+            <div class="admission-header">
+                <h1>Student Admission Form</h1>
+                <p>Join HAMIN - Excellence in Education. Fill in the details below to apply for admission.</p>
+            </div>
+
+            <form id="admissionFormElement">
+                <!-- Institution Level Selection -->
+                <div class="form-section">
+                    <h2 class="section-title">Step 1: Select Your Institution Level</h2>
+                    <p class="section-subtitle">Choose the type of institution where you want to take admission</p>
+
+                    <div class="level-selection">
+                        <div class="level-option" data-level="school" onclick="selectLevel('school', this)">
+                            <span class="icon">🏫</span>
+                            <span class="label">School</span>
+                        </div>
+                        <div class="level-option" data-level="college" onclick="selectLevel('college', this)">
+                            <span class="icon">🏛️</span>
+                            <span class="label">College</span>
+                        </div>
+                        <div class="level-option" data-level="university" onclick="selectLevel('university', this)">
+                            <span class="icon">🎓</span>
+                            <span class="label">University</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- School Details (for School level) -->
+                <div id="schoolDetails" class="form-section school-details hidden">
+                    <h2 class="section-title">School Admission Details</h2>
+                    <p class="section-subtitle">Please select the class you want to apply for</p>
+
+                    <div class="form-group">
+                        <label for="schoolName">School Name <span class="required">*</span></label>
+                        <input type="text" id="schoolName" name="schoolName" placeholder="Enter your school name" required>
+                    </div>
+
+                    <div class="class-selection">
+                        <label class="form-group" style="margin-bottom: 1rem;">
+                            <span>Select Class <span class="required">*</span></span>
+                            <select id="schoolClass" name="schoolClass" required>
+                                <option value="">-- Select Class --</option>
+                                <option value="1">Class 1</option>
+                                <option value="2">Class 2</option>
+                                <option value="3">Class 3</option>
+                                <option value="4">Class 4</option>
+                                <option value="5">Class 5</option>
+                                <option value="6">Class 6</option>
+                                <option value="7">Class 7</option>
+                                <option value="8">Class 8</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                                <option value="11">Class 11 (Science)</option>
+                                <option value="12">Class 12 (Science)</option>
+                                <option value="11-commerce">Class 11 (Commerce)</option>
+                                <option value="12-commerce">Class 12 (Commerce)</option>
+                                <option value="11-humanities">Class 11 (Humanities)</option>
+                                <option value="12-humanities">Class 12 (Humanities)</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- College Details (for College level) -->
+                <div id="collegeDetails" class="form-section hidden">
+                    <h2 class="section-title">College Admission Details</h2>
+                    <p class="section-subtitle">Please select your desired course</p>
+
+                    <div class="form-group">
+                        <label for="collegeName">College Name <span class="required">*</span></label>
+                        <input type="text" id="collegeName" name="collegeName" placeholder="Enter your college name" required>
+                    </div>
+
+                    <div class="course-selection">
+                        <label class="form-group" style="margin-bottom: 1rem;">
+                            <span>Select Course <span class="required">*</span></span>
+                            <select id="collegeCourse" name="collegeCourse" required>
+                                <option value="">-- Select Course --</option>
+                                <optgroup label="Under Graduate (UG)">
+                                    <option value="bcom">B.Com (Bachelor of Commerce)</option>
+                                    <option value="bba">B.B.A (Bachelor of Business Administration)</option>
+                                    <option value="bca">B.C.A (Bachelor of Computer Applications)</option>
+                                    <option value="ba">B.A (Bachelor of Arts)</option>
+                                    <option value="bsc">B.Sc (Bachelor of Science)</option>
+                                    <option value="bcom-accounts">B.Com (Accounts & Finance)</option>
+                                    <option value="bcom-mba">B.Com (MBA Integrated)</option>
+                                </optgroup>
+                                <optgroup label="Post Graduate (PG)">
+                                    <option value="mcom">M.Com (Master of Commerce)</option>
+                                    <option value="mba">M.B.A (Master of Business Administration)</option>
+                                    <option value="ma">M.A (Master of Arts)</option>
+                                    <option value="msc">M.Sc (Master of Science)</option>
+                                </optgroup>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- University Details (for University level) -->
+                <div id="universityDetails" class="form-section hidden">
+                    <h2 class="section-title">University Admission Details</h2>
+                    <p class="section-subtitle">Please select your preferred program</p>
+
+                    <div class="form-group">
+                        <label for="universityName">University Name <span class="required">*</span></label>
+                        <input type="text" id="universityName" name="universityName" placeholder="Enter your university name" required>
+                    </div>
+
+                    <div class="course-selection">
+                        <label class="form-group" style="margin-bottom: 1rem;">
+                            <span>Select Program <span class="required">*</span></span>
+                            <select id="universityProgram" name="universityProgram" required>
+                                <option value="">-- Select Program --</option>
+                                <optgroup label="Under Graduate">
+                                    <option value="btech">B.Tech (Bachelor of Technology)</option>
+                                    <option value="bca">B.C.A (Bachelor of Computer Applications)</option>
+                                    <option value="bsc-it">B.Sc (Information Technology)</option>
+                                    <option value="bcom">B.Com</option>
+                                    <option value="ba">B.A</option>
+                                    <option value="llb">LL.B (Bachelor of Law)</option>
+                                    <option value="mba-integrated">M.B.A (Integrated)</option>
+                                </optgroup>
+                                <optgroup label="Post Graduate">
+                                    <option value="mtech">M.Tech (Master of Technology)</option>
+                                    <option value="mca">M.C.A (Master of Computer Applications)</option>
+                                    <option value="mba">M.B.A</option>
+                                    <option value="ma">M.A</option>
+                                    <option value="msc">M.Sc</option>
+                                    <option value="llm">LL.M (Master of Law)</option>
+                                    <option value="phd">Ph.D (Research Program)</option>
+                                </optgroup>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Student Personal Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Step 2: Student Personal Information</h2>
+                    <p class="section-subtitle">Complete your personal details</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                            <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gender">Gender <span class="required">*</span></label>
+                            <select id="gender" name="gender" required>
+                                <option value="">-- Select Gender --</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Current Address <span class="required">*</span></label>
+                            <textarea id="address" name="address" placeholder="Enter your complete address" rows="2" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="aadhaar">Aadhaar Number <span class="required">*</span></label>
+                        <input type="text" id="aadhaar" name="aadhaar" placeholder="Enter your 12-digit Aadhaar number" maxlength="12" required>
+                    </div>
+                </div>
+
+                <!-- Parents/Guardian Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Step 3: Parents/Guardian Information</h2>
+                    <p class="section-subtitle">Please provide parent/guardian details</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fatherName">Father's Name <span class="required">*</span></label>
+                            <input type="text" id="fatherName" name="fatherName" placeholder="Enter father's full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fatherPhone">Father's Phone <span class="required">*</span></label>
+                            <input type="tel" id="fatherPhone" name="fatherPhone" placeholder="Enter father's phone number" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="motherName">Mother's Name <span class="required">*</span></label>
+                            <input type="text" id="motherName" name="motherName" placeholder="Enter mother's full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="motherPhone">Mother's Phone <span class="required">*</span></label>
+                            <input type="tel" id="motherPhone" name="motherPhone" placeholder="Enter mother's phone number" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parentAddress">Parent/Guardian Address <span class="required">*</span></label>
+                        <textarea id="parentAddress" name="parentAddress" placeholder="Enter parent/guardian complete address" rows="3" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Previous School/Education Information -->
+                <div class="form-section">
+                    <h2 class="section-title">Step 4: Previous School/Education Information</h2>
+                    <p class="section-subtitle">Details of your previous educational qualifications</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="previousSchool">Previous School/College Name <span class="required">*</span></label>
+                            <input type="text" id="previousSchool" name="previousSchool" placeholder="Enter school/college name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="previousYear">Year of Passing <span class="required">*</span></label>
+                            <input type="number" id="previousYear" name="previousYear" placeholder="YYYY" min="1950" max="2030" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="previousBoard">Board/University <span class="required">*</span></label>
+                            <input type="text" id="previousBoard" name="previousBoard" placeholder="Enter board/university name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="previousPercentage">Percentage/CGPA (%) <span class="required">*</span></label>
+                            <input type="number" id="previousPercentage" name="previousPercentage" placeholder="Enter your percentage or CGPA" min="0" max="100" step="0.01" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subjects">Subjects Studied <span class="required">*</span></label>
+                        <textarea id="subjects" name="subjects" placeholder="List subjects studied (e.g., Mathematics, Physics, Chemistry)" rows="2" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="button" class="back-btn" onclick="window.history.back()">← Back</button>
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Success Message (hidden initially) -->
+        <div id="successMessage" class="success-message hidden">
+            <div class="icon">✅</div>
+            <h2>Application Submitted!</h2>
+            <p>Thank you for submitting your admission application. Our team will review your application and contact you soon.</p>
+            <p>Your application reference number will be sent to your email address.</p>
+            <button class="back-btn" onclick="window.location.href='index.html'">Return to Home</button>
+        </div>
+    </main>
+
+    <script>
+        // Level Selection
+        function selectLevel(level, element) {
+            // Remove selected class from all options
+            document.querySelectorAll('.level-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            // Add selected class to clicked option
+            element.classList.add('selected');
+
+            // Hide all details sections
+            document.getElementById('schoolDetails').classList.add('hidden');
+            document.getElementById('collegeDetails').classList.add('hidden');
+            document.getElementById('universityDetails').classList.add('hidden');
+
+            // Show selected section
+            if (level === 'school') {
+                document.getElementById('schoolDetails').classList.remove('hidden');
+            } else if (level === 'college') {
+                document.getElementById('collegeDetails').classList.remove('hidden');
+            } else if (level === 'university') {
+                document.getElementById('universityDetails').classList.remove('hidden');
+            }
+        }
+
+        // Form Validation and Submission
+        document.getElementById('admissionFormElement').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validate required fields
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#ef4444';
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+
+            // Validate Aadhaar number (should be 12 digits)
+            const aadhaar = document.getElementById('aadhaar');
+            if (aadhaar.value.trim().length !== 12 || isNaN(aadhaar.value)) {
+                isValid = false;
+                aadhaar.style.borderColor = '#ef4444';
+            } else {
+                aadhaar.style.borderColor = '';
+            }
+
+            if (!isValid) {
+                alert('Please fill in all required fields correctly.');
+                return;
+            }
+
+            // Get selected level
+            const selectedLevel = document.querySelector('.level-option.selected')?.dataset.level;
+            if (!selectedLevel) {
+                alert('Please select an institution level (School, College, or University).');
+                return;
+            }
+
+            // Show success message and hide form
+            document.getElementById('admissionForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+
+            // Prepare form data
+            const formData = {
+                institutionLevel: selectedLevel,
+                studentName: document.getElementById('studentName').value,
+                dateOfBirth: document.getElementById('dateOfBirth').value,
+                gender: document.getElementById('gender').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                aadhaar: document.getElementById('aadhaar').value,
+                fatherName: document.getElementById('fatherName').value,
+                fatherPhone: document.getElementById('fatherPhone').value,
+                motherName: document.getElementById('motherName').value,
+                motherPhone: document.getElementById('motherPhone').value,
+                parentAddress: document.getElementById('parentAddress').value,
+                previousSchool: document.getElementById('previousSchool').value,
+                previousYear: document.getElementById('previousYear').value,
+                previousBoard: document.getElementById('previousBoard').value,
+                previousPercentage: document.getElementById('previousPercentage').value,
+                subjects: document.getElementById('subjects').value,
+                submissionDate: new Date().toISOString()
+            };
+
+            // Log form data (in production, send this to your server)
+            console.log('Application submitted:', formData);
+
+            // Store in localStorage for demo purposes
+            try {
+                localStorage.setItem('hamin_admission_' + Date.now(), JSON.stringify(formData));
+            } catch (e) {
+                console.log('Could not save to localStorage:', e);
+            }
+
+            // In a real application, you would send this data to your backend:
+            // fetch('/api/admission', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(formData)
+            // });
+        });
+
+        // Validate Aadhaar input (only numbers, max 12 digits)
+        document.getElementById('aadhaar').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 12);
+        });
+
+        // Validate phone inputs (only numbers, max 10 digits)
+        ['phone', 'fatherPhone', 'motherPhone'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);
+            });
+        });
+    </script>
+</body>
+</html>
